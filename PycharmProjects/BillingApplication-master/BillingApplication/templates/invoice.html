@@ -1,0 +1,80 @@
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title>Invoice</title>
+		{% load static %}
+		<link rel="stylesheet" href="{% static 'css/styles.css' %}">
+
+	</head>
+	<body>
+		<header>
+			<h1>Invoice</h1>
+			<address contenteditable>
+				<p>{{userName}}</p>
+			</address>
+		</header>
+		<article>
+			<h1>Recipient</h1>
+			<address contenteditable>
+				<p>XYZ Company<br>c/o Sandesh</p>
+			</address>
+			<table class="meta">
+				<tr>
+					<th><span contenteditable>Invoice #</span></th>
+					<td><span contenteditable>{{paymentId}}</span></td>
+				</tr>
+				<tr>
+					<th><span contenteditable>Date</span></th>
+					<td><span contenteditable>{{date}}</span></td>
+				</tr>
+				<tr>
+					<th><span contenteditable>Amount Due</span></th>
+					<td><span id="prefix" contenteditable>Rs.</span><span>{{amountDue}}</span></td>
+				</tr>
+			</table>
+			<table class="inventory">
+				<thead>
+					<tr>
+						<th><span contenteditable>Item</span></th>
+						<th><span contenteditable>Category</span></th>
+						<th><span contenteditable>Price</span></th>
+					</tr>
+				</thead>
+				<tbody>
+					{% for its in items %}
+					<tr>
+						<td><span contenteditable>{{its.itemName}}</span></td>
+						<td><span contenteditable>{{its.category}}</span></td>
+						<td><span data-prefix>₹</span><span>{{its.itemCostinINR}}</span></td>
+					</tr>
+					{% endfor %}
+				</tbody>
+			</table>
+
+			<table class="balance">
+				<tr>
+					<th><span contenteditable>Total Sub Cost</span></th>
+					<td><span data-prefix>₹</span><span>{{totalSubCost}}</span></td>
+				</tr>
+				<tr>
+					<th><span contenteditable>TotalCost</span></th>
+					<td><span data-prefix>₹</span><span>{{totalCost}}</span></td>
+				</tr>
+				<tr>
+					<th><span contenteditable>Amount Paid</span></th>
+					<td><span data-prefix>₹</span><span contenteditable>{{totalPaid}}</span></td>
+				</tr>
+				<tr>
+					<th><span contenteditable>Balance Due</span></th>
+					<td><span data-prefix>₹</span><span>{{amountDue}}</span></td>
+				</tr>
+			</table>
+		</article>
+		<aside>
+			<h1><span contenteditable>Additional Notes</span></h1>
+			<div contenteditable>
+				<p>A finance charge of 1.5% will be made on unpaid balances after 30 days.</p>
+			</div>
+		</aside>
+	</body>
+</html>
